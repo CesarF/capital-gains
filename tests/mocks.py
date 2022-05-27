@@ -1,7 +1,7 @@
 from app.adapters.repositories.base_repository import BaseRepository
 
 
-class MockRepository(BaseRepository):
+class MockAccountRepository(BaseRepository):
 
     def clear(self):
         pass

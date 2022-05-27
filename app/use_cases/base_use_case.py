@@ -1,12 +1,16 @@
-from app.adapters.repositories.account_repository import State
+from typing import Dict
+
+from app.adapters.repositories.base_repository import BaseRepository
 
 
 class BaseUseCase():
 
-    _state: State
+    _repo: BaseRepository
+    _processors: Dict
 
-    def __init__(self, state:State):
-        self._state = state
+    def __init__(self, repo:BaseRepository, processors:Dict = None):
+        self._repo = repo
+        self._processors = processors
 
     def process(self, simulations:list) -> list:
         raise NotImplemented('Not implemented method')
