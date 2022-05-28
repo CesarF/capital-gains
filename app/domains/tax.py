@@ -10,7 +10,5 @@ class Tax():
 
     value = property(get_value, None)
 
-def tax_to_json(tax:Tax):
-    return {
-        'tax': tax.value
-    }
+def tax_to_json(tax:Tax) -> dict:
+    return {'tax': tax.value}

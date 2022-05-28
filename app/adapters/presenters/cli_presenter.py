@@ -3,22 +3,21 @@ import sys, json
 from app.domains.operation import json_to_operation
 from app.domains.tax import tax_to_json
 from app.adapters.presenters.base_presenter import BasePresenter
+from app.use_cases.base_use_case import BaseUseCase
 
 
 class CliPresenter(BasePresenter):
 
-    _lines: list
-
     def start(self):
-        self._lines = []
-        for line in sys.stdin:
-            if '' == line.rstrip():
+        simulations = []
+        for input_line in sys.stdin:
+            if '' == input_line.rstrip():
                 break
-            json_list = json.loads(line)
-            self._lines.append(list(map(lambda ope: json_to_operation(ope),json_list)))
-        use_case = self._use_cases['taxes']
-        taxes = use_case.process(self._lines)
-        for simulation_taxes in taxes:
-            for tax in simulation_taxes:
-                print(tax_to_json(tax), end=' ')
-            print()
+            json_line = json.loads(input_line)
+            simulations.append([json_to_operation(json_obj) for json_obj in json_line])
+        use_case = self._use_cases[BaseUseCase]
+        simulations_taxes = use_case.process(simulations)
+        for simulation_taxes in simulations_taxes:
+            simulation_result = [tax_to_json(tax) for tax in simulation_taxes]
+            sys.stdout.write(json.dumps(simulation_result))
+            sys.stdout.write('\n')

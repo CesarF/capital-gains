@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Dict, List
 
 from app.adapters.repositories.base_repository import BaseRepository
 
@@ -12,5 +12,5 @@ class BaseUseCase():
         self._repo = repo
         self._processors = processors
 
-    def process(self, simulations:list) -> list:
+    def process(self, simulations:List) -> List:
         raise NotImplemented('Not implemented method')
