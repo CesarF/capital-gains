@@ -13,7 +13,7 @@ class TestOperationProcessors(TestCase):
     def test_process_buy_operation__first_time(self):
         unit_cost = fake.random_number()
         quantity = fake.random_number()
-        operation = Operation(op_type='buy', unit_cost = unit_cost, quantity = quantity)
+        operation = Operation(op_type = 'buy', unit_cost = unit_cost, quantity = quantity)
         account = Account()
         tax, account = process_buy_operation(operation, account)
 
@@ -28,7 +28,7 @@ class TestOperationProcessors(TestCase):
         quantity = fake.random_number()
         second_unit_cost = fake.random_number()
         second_quantity = fake.random_number()
-        second_weighted_average_price =  ((quantity * unit_cost) + (second_quantity * second_unit_cost)) / (quantity + second_quantity)
+        second_weighted_average_price = round(((quantity * unit_cost) + (second_quantity * second_unit_cost)) / (quantity + second_quantity), 2)
         operation = Operation(op_type = 'buy', unit_cost = unit_cost, quantity = quantity)
         second_operation = Operation(op_type = 'buy', unit_cost = second_unit_cost, quantity = second_quantity)
         account = Account()

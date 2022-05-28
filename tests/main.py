@@ -1,3 +1,4 @@
+# To avoid run this file if it is imported
 if __name__ == '__main__':
     from unittest import TestLoader, TextTestRunner
 

@@ -37,9 +37,9 @@ def calculate_sell_taxes(operation:Operation, account:Account) -> Tuple[float, A
 def process_buy_operation(operation:Operation, account:Account) -> Tuple[float, Account]:
     # Create a new account to avoid side effects
     new_account = account.clone()
-    new_account.weighted_average_price = (
+    new_account.weighted_average_price = round(
         ((new_account.current_stock_quantity * new_account.weighted_average_price) + (operation.quantity * operation.unit_cost))
         /(new_account.current_stock_quantity + operation.quantity)
-    )
+    , 2)
     new_account.current_stock_quantity = new_account.current_stock_quantity + operation.quantity
     return 0, new_account
