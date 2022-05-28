@@ -6,13 +6,13 @@ from unittest import TestCase
 class IntegrationTest(TestCase):
 
     def setUp(self):
-        output = subprocess.run(['pwd'], capture_output=True, text=True)
+        output = subprocess.run(['pwd'], capture_output = True, text = True)
         self._path = output.stdout.replace('\n','')
 
     def execute_command(self, filename:str) -> List[str]:
         cmd = 'python3 %s/main.py < %s/tests/txt/%s' % (self._path, self._path, filename)
         # Since last element is empty, we return a list without it
-        return subprocess.run(cmd, capture_output=True, text=True, shell=True).stdout.split('\n')[:-1]
+        return subprocess.run(cmd, capture_output = True, text = True, shell = True).stdout.split('\n')[:-1]
     
     def str_to_json(self, str_line:str):
         return json.loads(str_line)

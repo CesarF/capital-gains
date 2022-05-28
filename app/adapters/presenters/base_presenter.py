@@ -1,8 +1,11 @@
+from typing import Dict
+
+
 class BasePresenter():
 
-    _use_cases: dict
+    _use_cases: Dict
 
-    def __init__(self, use_cases: dict):
+    def __init__(self, use_cases: Dict):
         self._use_cases = use_cases
 
     def start(self):

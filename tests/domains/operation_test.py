@@ -9,7 +9,7 @@ fake = Faker()
 class TestOperation(TestCase):
 
     def setUp(self):
-        self._op_type = fake.random_letters(length = 16)
+        self._op_type = fake.word()
         self._unit_cost = fake.random_number()
         self._quantity = fake.random_number()
         self._operation = Operation(self._op_type, self._unit_cost, self._quantity)
@@ -24,7 +24,7 @@ class TestOperation(TestCase):
         self.assertEqual(self._operation.quantity, self._quantity)
 
     def test_set_op_type(self):
-        new_op_type = fake.random_letters(length = 16)
+        new_op_type = fake.word()
         self._operation.op_type = new_op_type
         self.assertEqual(new_op_type, self._operation.op_type)
 
